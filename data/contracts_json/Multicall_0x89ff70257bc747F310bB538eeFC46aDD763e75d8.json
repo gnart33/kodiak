@@ -1,0 +1,58 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "src/pools/v3-periphery/lens/UniswapInterfaceMulticall.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity =0.7.6;\npragma abicoder v2;\n\n/// @notice A fork of Multicall2 specifically tailored for the Uniswap Interface\ncontract UniswapInterfaceMulticall {\n    struct Call {\n        address target;\n        uint256 gasLimit;\n        bytes callData;\n    }\n\n    struct Result {\n        bool success;\n        uint256 gasUsed;\n        bytes returnData;\n    }\n\n    function getCurrentBlockTimestamp() public view returns (uint256 timestamp) {\n        timestamp = block.timestamp;\n    }\n\n    function getEthBalance(address addr) public view returns (uint256 balance) {\n        balance = addr.balance;\n    }\n\n    function multicall(Call[] memory calls) public returns (uint256 blockNumber, Result[] memory returnData) {\n        blockNumber = block.number;\n        returnData = new Result[](calls.length);\n        for (uint256 i = 0; i < calls.length; i++) {\n            (address target, uint256 gasLimit, bytes memory callData) =\n                (calls[i].target, calls[i].gasLimit, calls[i].callData);\n            uint256 gasLeftBefore = gasleft();\n            (bool success, bytes memory ret) = target.call{gas: gasLimit}(callData);\n            uint256 gasUsed = gasLeftBefore - gasleft();\n            returnData[i] = Result(success, gasUsed, ret);\n        }\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "remappings": [
+      "forge-std/=lib/forge-std/src/",
+      "@uniswap/lib/=lib/solidity-lib/",
+      "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+      "base64-sol/=lib/base64/",
+      "@kodiak-finance/v3-periphery/contracts/=src/pools/v3-periphery/",
+      "@kodiak-finance/v2-periphery/contracts/=src/pools/v2-periphery/",
+      "@kodiak-finance/v2-core/contracts/=lib/v2-core/contracts/",
+      "@kodiak-finance/v3-core/contracts/libraries/=lib/v3-core/contracts/libraries/",
+      "@kodiak-finance/v3-core/contracts/interfaces/=lib/@kodiak-finance/v3-core/contracts/interfaces/",
+      "@openzeppelin-8/contracts/=lib/openzeppelin-contracts-new/contracts/",
+      "base64/=lib/base64/",
+      "ds-test/=lib/forge-std/lib/ds-test/src/",
+      "erc4626-tests/=lib/openzeppelin-contracts-new/lib/erc4626-tests/",
+      "openzeppelin-contracts-new/=lib/openzeppelin-contracts-new/",
+      "openzeppelin-contracts/=lib/openzeppelin-contracts/contracts/",
+      "openzeppelin/=lib/openzeppelin-contracts-new/contracts/",
+      "solidity-lib/=lib/solidity-lib/contracts/",
+      "v2-core/=lib/v2-core/contracts/",
+      "v3-core/=lib/v3-core/",
+      "@kodiak-finance/v3-periphery/contracts/=src/pools/v3-periphery/",
+      "@kodiak-finance/v2-periphery/contracts/=src/pools/v2-periphery/",
+      "@kodiak-finance/v2-core/contracts/=lib/v2-core/contracts/",
+      "@kodiak-finance/v3-core/contracts/libraries/=lib/v3-core/contracts/libraries/"
+    ],
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "metadata": {
+      "useLiteralContent": false,
+      "bytecodeHash": "ipfs"
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "devdoc",
+          "userdoc",
+          "metadata",
+          "abi"
+        ]
+      }
+    },
+    "evmVersion": "istanbul",
+    "viaIR": false,
+    "libraries": {}
+  }
+}
