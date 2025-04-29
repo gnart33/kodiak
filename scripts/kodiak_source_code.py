@@ -2,6 +2,7 @@ from berascan_api import BeraScanAPI
 from contract_writer import write_contract
 import json
 import os
+import time
 
 import logging
 
@@ -26,21 +27,22 @@ def fetch_contracts():
             contract_address,
             f"data/contracts_json/{contract_name}_{contract_address}.json",
         )
+        time.sleep(30)
         logger.info(f"Saved {contract_name}_{contract_address}.json")
 
 
 def write_contracts():
-    # for file in os.listdir("data/contracts_json"):
-    #     if file.endswith(".json"):
-    #         logger.info(f"writing {file}")
-    #         write_contract(f"data/contracts_json/{file}")
+    for file in os.listdir("data/contracts_json"):
+        if file.endswith(".json"):
+            logger.info(f"writing {file}")
+            write_contract(f"data/contracts_json/{file}")
 
-    f = "UniswapV3Factory_0xD84CBf0B02636E7f53dB9E5e45A616E05d710990"
-    contract_json = f"data/contracts_json/{f}.json"
+    # f = "UniswapV2Router02_0xd91dd58387Ccd9B66B390ae2d7c66dBD46BC6022"
+    # contract_json = f"data/contracts_json/{f}.json"
 
-    write_contract(contract_json)
+    # write_contract(contract_json)
 
 
 if __name__ == "__main__":
-    # fetch_contracts()
-    write_contracts()
+    fetch_contracts()
+    # write_contracts()
