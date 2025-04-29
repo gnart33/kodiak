@@ -3,14 +3,12 @@ src = "src"
 out = "out"
 libs = ["lib"]
 
-remappings = [
-    "forge-std/=lib/forge-std/src/",
-    "@uniswap/lib/=lib/solidity-lib/",
-    "@openzeppelin-8/contracts/=lib/openzeppelin-contracts-new/contracts/",
-    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
-    "@kodiak-finance/v3-periphery/contracts/=src/pools/v3-periphery/",
-    "@kodiak-finance/v2-periphery/contracts/=src/pools/v2-periphery/",
-    "@kodiak-finance/v2-core/contracts/=lib/v2-core/contracts/",
-    "@kodiak-finance/v3-core/contracts/libraries/=lib/v3-core/contracts/libraries/",
 
-]
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = true
+int_types = "long"
+func_vis = "public"
+quote_style = "double"
+number_underscore = "thousands"

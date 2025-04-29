@@ -44,5 +44,5 @@ def write_contracts():
 
 
 if __name__ == "__main__":
-    fetch_contracts()
-    # write_contracts()
+    # fetch_contracts()
+    write_contracts()

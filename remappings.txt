@@ -1,0 +1,14 @@
+@openzeppelin/=lib/openzeppelin-contracts/
+@openzeppelin-new/=lib/openzeppelin-contracts-new/
+@openzeppelin-8/contracts/=lib/openzeppelin-contracts-new/contracts/
+@solady/=lib/solady/src/
+@v3-core/=lib/v3-core/contracts/
+@v3-periphery/=lib/v3-periphery/contracts/ 
+forge-std/=lib/forge-std/src/
+@uniswap/lib/=lib/solidity-lib/
+@kodiak-finance/v3-periphery/contracts/=src/pools/v3-periphery/
+@kodiak-finance/v2-periphery/contracts/=src/pools/v2-periphery/
+@kodiak-finance/v2-core/contracts/=lib/v2-core/contracts/
+@kodiak-finance/v3-core/contracts/=src/pools/v3-core/
+@solady/=lib/solady/src/
+@v0.8.12/=src/v0.8.12/
